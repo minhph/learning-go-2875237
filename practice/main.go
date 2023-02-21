@@ -2,18 +2,17 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"time"
 )
 
 func main() {
-	i1, i2, i3 := 22, 45, 59
-	intSum := i1 + i2 + i3
-	fmt.Println(intSum)
+	n := time.Now()
+	fmt.Println("Time now is: ", n)
 
-	f1, f2, f3 := 22.34, 421.24, 120.31
-	floatSum := f1 + f2 + f3
-	fmt.Println(floatSum)
+	t := time.Date(2023, time.April, 12, 18, 30, 30, 30, time.UTC)
+	timeFormatted := t.Format(time.ANSIC)
+	fmt.Println("I was born at", timeFormatted)
 
-	floatSum = math.Round(floatSum)
-	fmt.Println("The sum is now: ", floatSum)
+	parsedTime, _ := time.Parse(time.ANSIC, "Tue Nov 10 23:00:00:00 2009")
+	fmt.Printf("The type of parsed Times is: %T", parsedTime)
 }
