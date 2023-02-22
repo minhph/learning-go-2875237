@@ -1,18 +1,40 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"time"
+	"os"
+	"strconv"
+	"strings"
 )
 
 func main() {
-	n := time.Now()
-	fmt.Println("Time now is: ", n)
+	reader := bufio.NewReader(os.Stdin)
 
-	t := time.Date(2023, time.April, 12, 18, 30, 30, 30, time.UTC)
-	timeFormatted := t.Format(time.ANSIC)
-	fmt.Println("I was born at", timeFormatted)
+	fmt.Print("Value 1: ")
+	stringInput1, _ := reader.ReadString('\n')
+	floatOperator1, err1 := strconv.ParseFloat(strings.TrimSpace(stringInput1), 64)
 
-	parsedTime, _ := time.Parse(time.ANSIC, "Tue Nov 10 23:00:00:00 2009")
-	fmt.Printf("The type of parsed Times is: %T", parsedTime)
+	if err1 != nil {
+		fmt.Println(err1)
+		panic("The input value must be a number.")
+	}
+
+	fmt.Print("Value 2: ")
+	stringInput2, _ := reader.ReadString('\n')
+	floatOperator2, err2 := strconv.ParseFloat(strings.TrimSpace(stringInput2), 64)
+
+	if err2 != nil {
+		fmt.Println(err2)
+		panic("The input value must be a number.")
+	}
+
+	sum := floatOperator1 + floatOperator2
+	fmt.Printf("The sum of %.2f and %.2f is %.2f\n", floatOperator1, floatOperator2, sum)
+
+	// The ReadString method actually invokes standard input (console).
+	// The NewReader(os.Stdin) method only return an reader object that can read from standard input.
+	// It does not invoke input.
+	// Therefore, we only need 1 reader for this.
+	// The argument "\n" on reader.ReadString('\n') means saves characters on buffer memory until the delimiter "\n" is reached.
 }
