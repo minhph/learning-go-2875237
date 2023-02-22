@@ -37,4 +37,6 @@ func main() {
 	// It does not invoke input.
 	// Therefore, we only need 1 reader for this.
 	// The argument "\n" on reader.ReadString('\n') means saves characters on buffer memory until the delimiter "\n" is reached.
+	// strconv.ParseFloat is used to parse a string value into Float format, return output float and a error message.
+	// Panic is used to terminate program if exception happens, with a message as argument.
 }
