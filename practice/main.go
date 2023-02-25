@@ -26,6 +26,12 @@ func main() {
 
 	fmt.Println("Number string: ", numbers)
 	fmt.Println(cap(numbers), len(numbers))
+	fmt.Println("Before sort: ", &numbers[0], &numbers[1], &numbers[2])
 
 	sort.Ints(numbers)
+	fmt.Println("Number string: ", numbers)
+	fmt.Println(cap(numbers), len(numbers))
+	fmt.Println("After sort: ", &numbers[0], &numbers[1], &numbers[2])
+
+	// 0x1400001c0f0 0x1400001c0f8 0x1400001c100 continous 8-bits memory address)
 }
