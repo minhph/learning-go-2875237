@@ -2,13 +2,30 @@ package main
 
 import (
 	"fmt"
+	"sort"
 )
 
 func main() {
-	anInt := 2
-	var p *int      // a pointer pointing to an int value, zero-value: nil
-	p = &anInt      // assign address of anInt to p (type stricted)
-	fmt.Println(p)  // the memory address which pointer is pointing to
-	fmt.Println(*p) // the value stored at the memory address the pointer is pointing to
-	fmt.Println(&p) // the memory address of the pointer itself
+	var colors = []string{"Red", "Green", "Blue"}
+	fmt.Println(colors)
+
+	colors = append(colors, "Black")
+	fmt.Println(colors)
+
+	colors = append(colors[:len(colors)-1]) // return a subset of original arrays with index from a to b-1, exclusive b
+	fmt.Println(colors)
+
+	numbers := make([]int, 4) // capacity is not specified, which means it is default value, equal to the size
+	numbers[0] = 12
+	numbers[1] = 76
+	numbers[2] = 92
+	numbers[3] = 53
+
+	numbers = append(numbers, 14, 315, 214, 1001, 234)
+	// append can add more and more elements but Go have to reallocate if the size exceeds the capacity
+
+	fmt.Println("Number string: ", numbers)
+	fmt.Println(cap(numbers), len(numbers))
+
+	sort.Ints(numbers)
 }
