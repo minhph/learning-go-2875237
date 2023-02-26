@@ -6,32 +6,43 @@ import (
 )
 
 func main() {
-	var colors = []string{"Red", "Green", "Blue"}
-	fmt.Println(colors)
+	states := make(map[string]string)
+	// states holds a data struct consisiting of a hexadecimal
+	// memory address of the object on heap, an integer (size), an integer(capacity)
 
-	colors = append(colors, "Black")
-	fmt.Println(colors)
+	fmt.Println(states)
+	states["WA"] = "Washington"
+	states["NY"] = "New York"
+	states["OL"] = "Oklahoma"
+	states["MI"] = "Missisipi"
+	fmt.Println(states)
+	fmt.Printf("%p\n", states)
 
-	colors = append(colors[:len(colors)-1]) // return a subset of original arrays with index from a to b-1, exclusive b
-	fmt.Println(colors)
+	oklahoma := states["OL"]
+	fmt.Println(oklahoma)
 
-	numbers := make([]int, 4) // capacity is not specified, which means it is default value, equal to the size
-	numbers[0] = 12
-	numbers[1] = 76
-	numbers[2] = 92
-	numbers[3] = 53
+	delete(states, "NY")
+	fmt.Println(states)
 
-	numbers = append(numbers, 14, 315, 214, 1001, 234)
-	// append can add more and more elements but Go have to reallocate if the size exceeds the capacity
+	for k, v := range states {
+		fmt.Printf("%v: %v\n", k, v)
+	}
 
-	fmt.Println("Number string: ", numbers)
-	fmt.Println(cap(numbers), len(numbers))
-	fmt.Println("Before sort: ", &numbers[0], &numbers[1], &numbers[2])
+	// for...range is used for iteration, range is always used with for
+	// this returns an index first, then a value one at a time
 
-	sort.Ints(numbers)
-	fmt.Println("Number string: ", numbers)
-	fmt.Println(cap(numbers), len(numbers))
-	fmt.Println("After sort: ", &numbers[0], &numbers[1], &numbers[2])
+	keys := make([]string, len(states))
+	fmt.Println(len(keys))
 
-	// 0x1400001c0f0 0x1400001c0f8 0x1400001c100 continous 8-bits memory address)
+	i := 0
+	for k := range states {
+		keys[i] = k
+		i++
+	}
+	fmt.Println(keys)
+	sort.Strings(keys)
+
+	for i := range keys {
+		fmt.Println(states[keys[i]])
+	}
 }
