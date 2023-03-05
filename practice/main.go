@@ -1,36 +1,60 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strconv"
+	"strings"
 )
 
 func main() {
-	poodle := Dog{"Poodle", 10, "Woof!"}
-	fmt.Println(poodle)
-	fmt.Printf("%+v\n", poodle)
-	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
+	/*
+		type Calculator struct {
+			operator1 string
+			operator2 string
+		}
 
-	poodle.Speak()
-	poodle.Sound = "Arf!"
-	poodle.Speak()
-	poodle.SpeakThreeTimes()
-	poodle.SpeakThreeTimes()
-}
+		func (c Calculator) sum() {
 
-// Dog is a struct
-type Dog struct {
-	Breed  string
-	Weight int
-	Sound  string
-}
+		}
+	*/
 
-// Speak is how the dog speaks
-func (d Dog) Speak() {
-	fmt.Println(d.Sound)
-}
+	reader := bufio.NewReader(os.Stdin)
 
-// SpeakThreeTimes is how the dog speaks loudly
-func (d Dog) SpeakThreeTimes() {
-	d.Sound = fmt.Sprintf("%v %v %v", d.Sound, d.Sound, d.Sound)
-	fmt.Println(d.Sound)
+	fmt.Print("Value 1: ")
+	input1, _ := reader.ReadString('\n')
+	operand1, err := strconv.ParseFloat(strings.TrimSpace(input1), 64)
+	if err != nil {
+		fmt.Println(err)
+		panic("Value 1 must be a number")
+	}
+
+	fmt.Print("Value 2: ")
+	input2, _ := reader.ReadString('\n')
+	operand2, err := strconv.ParseFloat(strings.TrimSpace(input2), 64)
+	if err != nil {
+		fmt.Println(err)
+		panic("Value 2 must be a number")
+	}
+
+	fmt.Print("Select an operation (+ - * /):")
+	operator, _ := reader.ReadString('\n')
+	operator = strings.TrimSpace(operator)
+	switch operator {
+	case "+":
+		result := operand1 + operand2
+		fmt.Printf("The result is: %.2f\n", result)
+	case "-":
+		result := operand1 - operand2
+		fmt.Printf("The result is: %.2f\n", result)
+	case "*":
+		result := operand1 * operand2
+		fmt.Printf("The result is: %.2f\n", result)
+	case "/":
+		result := operand1 / operand2
+		fmt.Printf("The result is: %.2f\n", result)
+	default:
+		panic("Invalid operation")
+	}
 }
