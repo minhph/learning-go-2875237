@@ -5,25 +5,22 @@ import (
 )
 
 func main() {
-	printSomething()
-	sumTwoValues := addTwoValues(3, 4)
-	sumManyValues := addManyValues(84, 512, 53)
-	fmt.Println(sumTwoValues)
-	fmt.Println(sumManyValues)
+	myAircraft := Aircraft{"A6M", "H6-Renzo"}
+	myAircraft.Fire()
+	myAircraft.FireDouble()
+	myAircraft.FireDouble()
 }
 
-func printSomething() {
-	fmt.Println("Print something.")
+type Aircraft struct {
+	Name    string
+	Missile string
 }
 
-func addTwoValues(value1, value2 int) int {
-	return value1 + value2
+func (a Aircraft) Fire() {
+	fmt.Println(a.Missile)
 }
 
-func addManyValues(values ...int) int {
-	total := 0
-	for v := range values {
-		total = total + values[v]
-	}
-	return total
+func (a Aircraft) FireDouble() {
+	a.Missile = fmt.Sprintf("%v %v", a.Missile, a.Missile)
+	fmt.Println(a.Missile)
 }
